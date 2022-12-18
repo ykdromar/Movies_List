@@ -1,7 +1,14 @@
 import React from "react";
+import { addToFav } from "../actions";
+
 class MovieCard extends React.Component {
+  handelAddToFav = () => {
+    const { movie, dispatch } = this.props;
+    dispatch(addToFav(movie));
+  };
+  handelRemoveFromFav = () => {};
   render() {
-    const { movie } = this.props;
+    const { movie, isMovieFav } = this.props;
     return (
       <div className="movie-card">
         <div className="left">
@@ -12,7 +19,13 @@ class MovieCard extends React.Component {
           <div className="plot">{movie.Plot}</div>
           <div className="footer">
             <div className="rating">{movie.imdbRating}</div>
-            <button className="favourite-btn">Add to favourite</button>
+            {isMovieFav ? (
+              <button className="unfavourite-btn">Unfavourite</button>
+            ) : (
+              <button className="favourite-btn" onClick={this.handelAddToFav}>
+                Favourites
+              </button>
+            )}
           </div>
         </div>
       </div>

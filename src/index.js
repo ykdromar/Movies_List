@@ -11,7 +11,7 @@ const store = createStore(movies);
 //   type: "ADD_MOVIES",
 //   movies: [{ name: "Superman" }],
 // });
-// console.log("after", store.getState());
+
 root.render(
   <React.StrictMode>
     <App store={store} />

@@ -1,5 +1,13 @@
-import { ADD_MOVIES, ADD_TO_FAV, REMOVE_FROM_FAV, SHOW_FAV } from "../actions";
+import {
+  ADD_MOVIES,
+  ADD_TO_FAV,
+  REMOVE_FROM_FAV,
+  SHOW_FAV,
+  ADD_SEARCH_RESULT,
+  ADD_MOVIE_TO_LIST,
+} from "../actions";
 import { combineReducers } from "redux";
+
 // initial movies state
 const initialMoviesState = {
   list: [],
@@ -46,6 +54,12 @@ export function movies(state = initialMoviesState, action) {
         ...state,
         showFav: action.value,
       };
+    case ADD_MOVIE_TO_LIST: {
+      return {
+        ...state,
+        list: [action.movie, ...state.list],
+      };
+    }
 
     default:
       return state;
@@ -55,14 +69,30 @@ export function movies(state = initialMoviesState, action) {
 //initial search state
 const initialSearchState = {
   result: {},
+  showSearchResult: false,
 };
 
 // search reducer
-export function seacrh(state = initialSearchState, action) {
-  return state;
+export function search(state = initialSearchState, action) {
+  switch (action.type) {
+    case ADD_SEARCH_RESULT:
+      return {
+        ...state,
+        result: action.movie,
+        showSearchResult: true,
+      };
+    case ADD_MOVIE_TO_LIST:
+      return {
+        result: {},
+        showSearchResult: false,
+      };
+    default:
+      return state;
+  }
 }
 
 /*---------------Our Combined reducer -------------------------------- */
+
 //initial rootState
 // const initialRootState = {
 //   movies: initialMoviesState,
@@ -80,5 +110,5 @@ export function seacrh(state = initialSearchState, action) {
 
 export default combineReducers({
   movies,
-  seacrh,
+  search,
 });

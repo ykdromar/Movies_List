@@ -15,7 +15,7 @@ class MovieCard extends React.Component {
     return (
       <div className="movie-card">
         <div className="left">
-          <img alt="poster" src={movie.poster}></img>
+          <img alt="poster" src={movie.Poster}></img>
         </div>
         <div className="right">
           <div className="title">{movie.Title}</div>

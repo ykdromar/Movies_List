@@ -28,12 +28,12 @@ class App extends React.Component {
     store.dispatch(toggleFavTab(value));
   };
   render() {
-    const { movies } = this.props.store.getState();
+    const { movies, search } = this.props.store.getState();
     const { showFav, list, favourites } = movies;
     const displayMovies = showFav ? favourites : list;
     return (
       <div className="App">
-        <Navbar />
+        <Navbar dispatch={this.props.store.dispatch} search={search} />
         <div className="main">
           <div className="tabs">
             <div

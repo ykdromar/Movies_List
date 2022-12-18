@@ -1,5 +1,6 @@
 import { ADD_MOVIES, ADD_TO_FAV, REMOVE_FROM_FAV, SHOW_FAV } from "../actions";
-// initial statee\
+import { combineReducers } from "redux";
+// initial movies state
 const initialMoviesState = {
   list: [],
   favourites: [],
@@ -7,7 +8,7 @@ const initialMoviesState = {
 };
 
 // movies reducer
-export default function movies(state = initialMoviesState, action) {
+export function movies(state = initialMoviesState, action) {
   /**********  In react community if-else is not used***************/
 
   // if (action.type === ADD_MOVIES) {
@@ -37,6 +38,7 @@ export default function movies(state = initialMoviesState, action) {
           if (movie.imdbID !== action.movie.imdbID) {
             return movie;
           }
+          return null;
         }),
       };
     case SHOW_FAV:
@@ -49,3 +51,34 @@ export default function movies(state = initialMoviesState, action) {
       return state;
   }
 }
+
+//initial search state
+const initialSearchState = {
+  result: {},
+};
+
+// search reducer
+export function seacrh(state = initialSearchState, action) {
+  return state;
+}
+
+/*---------------Our Combined reducer -------------------------------- */
+//initial rootState
+// const initialRootState = {
+//   movies: initialMoviesState,
+//   seacrh: initialSearchState,
+// };
+
+// export default function rootReducer(state = initialRootState, action) {
+//   return {
+//     movies: movies(state.movies, action),
+//     search: seacrh(state.seacrh, action),
+//   };
+// }
+
+/*----------------------Redux Combined Reducer-------------------------- */
+
+export default combineReducers({
+  movies,
+  seacrh,
+});

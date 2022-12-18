@@ -13,12 +13,9 @@ class App extends React.Component {
     store.dispatch(addMovies(data));
     console.log(store.getState());
   }
-  componentDidUpdate() {
-    const { store } = this.props;
-    console.log(store.getState());
-  }
   isMovieFav = (movie) => {
-    const { favourites } = this.props.store.getState();
+    const { movies } = this.props.store.getState();
+    const { favourites } = movies;
     const index = favourites.indexOf(movie);
     if (index !== -1) {
       return true;
@@ -31,7 +28,8 @@ class App extends React.Component {
     store.dispatch(toggleFavTab(value));
   };
   render() {
-    const { showFav, list, favourites } = this.props.store.getState();
+    const { movies } = this.props.store.getState();
+    const { showFav, list, favourites } = movies;
     const displayMovies = showFav ? favourites : list;
     return (
       <div className="App">

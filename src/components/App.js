@@ -14,7 +14,7 @@ class App extends React.Component {
     console.log(store.getState());
   }
   render() {
-    const movies = this.props.store.getState();
+    const movies = this.props.store.getState().list;
     return (
       <div className="App">
         <Navbar />

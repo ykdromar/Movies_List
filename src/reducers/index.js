@@ -1,8 +1,9 @@
-import { ADD_MOVIES, ADD_TO_FAV, REMOVE_FROM_FAV } from "../actions";
+import { ADD_MOVIES, ADD_TO_FAV, REMOVE_FROM_FAV, SHOW_FAV } from "../actions";
 // initial statee\
 const initialMoviesState = {
   list: [],
   favourites: [],
+  showFav: false,
 };
 
 // movies reducer
@@ -38,6 +39,12 @@ export default function movies(state = initialMoviesState, action) {
           }
         }),
       };
+    case SHOW_FAV:
+      return {
+        ...state,
+        showFav: action.value,
+      };
+
     default:
       return state;
   }
